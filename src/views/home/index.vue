@@ -71,7 +71,7 @@
 </template>
 
 <script>
-import eventBus from '@/eventBus'
+import eventBus from '@/eventBus.js'
 import local from '@/utils/local.js'
 export default {
   data () {
@@ -104,11 +104,11 @@ export default {
     this.src = photo
     this.username = name
     // 接收修改头像的数据
-    eventBus.on('updateName', (name) => {
+    eventBus.$on('updateName', (name) => {
       this.username = name
     })
     // 接收修改头像的数据
-    eventBus.on('updatePhoto', (photo) => {
+    eventBus.$on('updatePhoto', (photo) => {
       this.src = photo
     })
   }

@@ -1,18 +1,29 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Login from '@/views/login'
-import Home from '@/views/home'
-import Welcome from '@/views/welcome'
-import NotFind from '@/views/404'
-import article from '@/views/article'
-import Image from '@/views/image'
-import Publish from '@/views/publish'
-import Comment from '@/views/comment'
-import Setting from '@/views/setting'
-import Fans from '@/views/fans'
-
 import local from '@/utils/local.js'
+
+// import Login from '@/views/login'
+// import Home from '@/views/home'
+// import Welcome from '@/views/welcome'
+// import NotFind from '@/views/404'
+// import article from '@/views/article'
+// import Image from '@/views/image'
+// import Publish from '@/views/publish'
+// import Comment from '@/views/comment'
+// import Setting from '@/views/setting'
+// import Fans from '@/views/fans'
+
+const Login = () => import('@/views/login')
+const Home = () => import('@/views/home')
+const Welcome = () => import('@/views/welcome')
+const NotFind = () => import('@/views/404')
+const article = () => import('@/views/article')
+const Image = () => import('@/views/image')
+const Publish = () => import('@/views/publish')
+const Comment = () => import('@/views/comment')
+const Setting = () => import('@/views/setting')
+const Fans = () => import('@/views/fans')
 Vue.use(VueRouter)
 
 const router = new VueRouter({

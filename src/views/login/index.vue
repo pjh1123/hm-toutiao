@@ -21,6 +21,8 @@
 </template>
 
 <script>
+// 导入设置用户信息的工具函数
+import local from '@/utils/local.js'
 export default {
   data () {
     const checkPhone = (rule, value, callback) => {
@@ -52,18 +54,26 @@ export default {
   },
   methods: {
     login () {
-      this.$refs['form'].validate((valid) => {
+      this.$refs['form'].validate(async valid => {
         // valid布尔类型值  true 校验成功  false 校验失败
         if (valid) {
-          this.$http({
-            url: 'authorizations',
-            method: 'post',
-            data: { mobile: this.loginForm.phone, code: this.loginForm.code }
-          }).then(res => {
+          try {
+            const { data: { data } } = await this.$http.post('authorizations', { mobile: this.loginForm.phone, code: this.loginForm.code })
+            local.setUser(data)
             this.$router.push('/')
-          }).catch(() => {
+          } catch (e) {
             this.$message.error('手机号或者验证码不正确哦')
-          })
+          }
+          // this.$http({
+          //   url: 'authorizations',
+          //   method: 'post',
+          //   data: { mobile: this.loginForm.phone, code: this.loginForm.code }
+          // }).then(res => {
+          //   local.setUser(res.data.data)
+          //   this.$router.push('/')
+          // }).catch(() => {
+          //   this.$message.error('手机号或者验证码不正确哦')
+          // })
         }
       })
     }
@@ -71,7 +81,7 @@ export default {
 }
 </script>
 
-<style  lang="less">
+<style scoped lang='less'>
 .container {
     width: 100%;
     height: 100%;
